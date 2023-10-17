@@ -7,9 +7,10 @@ import { Link } from '@prisma/client/runtime/library';
 interface Song {
   id_song: number;
   song_name: string;
-  image:  Link; // Update the type of the 'image' property
+  image:  string; 
   id_category: number;
   lyric: string;
+  id_artist: number;
 }
 
 const PageContent = () => {

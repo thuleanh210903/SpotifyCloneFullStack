@@ -1,24 +1,29 @@
-"use client"
+"use client";
 import { Link } from "@prisma/client/runtime/library";
+import Image from "next/image";
 import PlayButton from "./PlayButton";
+import ArtistItem from "./ArtistItem";
+import usePlayer from "@/app/hooks/usePlayer";
 interface Song {
   id_song: number;
   song_name: string;
   lyric: string;
-  image: Link;
+  image: string;
   id_category: number;
+  id_artist: number;
 }
 
 interface SongItemProps {
   data: Song;
-  onClick?: (id: string) => void;
+  onClick?: (id: number) => void;
 }
 
 const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
-  console.log(data)
+
   return (
-    <div onClick={()=>{}}
-    className="relative 
+    <div
+    
+      className="relative 
     group 
     flex 
     flex-col 
@@ -33,27 +38,34 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
     transition 
     p-3"
     >
-      <div className="  relative 
+      <div
+        className="  relative 
           aspect-square 
           w-full
           h-full 
           rounded-md 
-          overflow-hidden">
-
+          overflow-hidden"
+      >
+        <img
+          src={`http://localhost:8081/images/${data.image}`}
+          alt="Song Image"
+        />
       </div>
       <div className="flex flex-col items-start w-full pt-4 gap-y-1">
-    
         <p className="font-semibold truncate w-full">{data.song_name}</p>
-        <p className="text-neutral-400 
-            text-sm 
-            pb-4 
-            w-full 
-            truncate">By {data.id_category}</p>
+        <p className="text-neutral-400 text-sm pb-4 w-full truncate">
+          By{" "}
+          <span>
+            <ArtistItem id_artist={data.id_artist} />
+          </span>
+        </p>
       </div>
-      <div className="  absolute 
+      <div
+        className="  absolute 
           bottom-24 
-          right-5">
-            <PlayButton />
+          right-5"
+      >
+        <PlayButton id={data.id_song}/>
       </div>
     </div>
   );

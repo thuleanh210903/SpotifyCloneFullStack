@@ -1,8 +1,22 @@
+import usePlayer from "@/app/hooks/usePlayer"
+import { data } from "autoprefixer"
 import { FaPlay } from "react-icons/fa"
 
-const PlayButton = () => {
+interface PlayButtonProps {
+  id:number
+}
+
+const PlayButton:React.FC<PlayButtonProps> = ({id}) => {
+  const player = usePlayer()
+  const handlePlayButtonClick = () => {
+  player.setId(id); // Truyền ID của bài hát
+ 
+  };
+
+
   return (
    <button
+   onClick={handlePlayButtonClick}
    className="transition 
    opacity-0 
    rounded-full 
