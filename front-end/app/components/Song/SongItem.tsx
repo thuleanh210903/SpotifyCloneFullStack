@@ -11,6 +11,7 @@ interface Song {
   image: string;
   id_category: number;
   id_artist: number;
+  file_music: string
 }
 
 interface SongItemProps {

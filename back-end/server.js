@@ -18,9 +18,11 @@ app.use(cors({
     credentials: true
 }));
 app.use('/images', express.static("E:\\projects\\spring_web_music\\uploads\\"));
+app.use('/music_file',express.static("E:\\projects\\spring_web_music\\upload_music\\"))
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -45,6 +47,12 @@ app.get('/images/:filename', (req, res) => {
     const filePath = `E:\\projects\\spring_web_music\\uploads\\${filename}`;
     res.sendFile(filePath);
 });
+
+app.get('/music_file/:filename',(req,res) => {
+    const filename = req.params.filename;
+    const filePath = `E:\\projects\\spring_web_music\\upload_music\\${filename}`;
+    res.sendFile(filePath);
+})
 
 app.get('/artists/:id_artist', (req,res)=>{
     const id_artist = req.params.id_artist;
